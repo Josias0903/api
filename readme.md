@@ -74,3 +74,16 @@ criar arquivo app.js na pasta src
 ````
 touch src/app
 ````
+
+## Rodar o NPM install sempre que fizer um clone do github
+
+## criar o arquivo .env e o .env.example
+`````
+touch .env
+`````
+
+
+
+`````
+touch .env.example
+`````
