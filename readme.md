@@ -82,8 +82,24 @@ touch src/app
 touch .env
 `````
 
-
-
 `````
 touch .env.example
+`````
+
+* Criar pas routes
+`````
+mkdir routes
+`````
+* Criar arquivo crudRouter.js dentro da pasta routes
+`````
+nano crudRouter.js
+`````
+
+### CTRL + O: salvar arquivo
+### Enter: confirma nome do arquivo
+### CTRL + X: sai da pagina
+
+* Digitar o codigo no arquivo criado
+`````
+asas
 `````
