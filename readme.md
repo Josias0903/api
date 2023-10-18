@@ -99,7 +99,14 @@ nano crudRouter.js
 ### Enter: confirma nome do arquivo
 ### CTRL + X: sai da pagina
 
-* Digitar o codigo no arquivo criado
+<hr>
+
+### Criação de controlers
+
 `````
-asas
+mkdir src/controlers
+`````
+### Criar arquivo controle.js
+`````
+touch src/controlers/controle.js
 `````
