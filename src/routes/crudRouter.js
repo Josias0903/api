@@ -1,7 +1,9 @@
 const { Router }= require("express");
 const router = Router();
 
-router.get('/api', (request, response) => (
+const { listarDados } = require(''./controlers/controle')
+
+router.get('/api', (listarDados) => (
     response.send('Retorno de lista de informações do bando de dados')
 ));
 
