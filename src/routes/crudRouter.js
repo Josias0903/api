@@ -1,24 +1,15 @@
 const { Router }= require("express");
 const router = Router();
 
-const { listarDados } = require(''./controlers/controle')
+const {     listarDados, gravarDados, deletarDados, atualizarDados
+} = require('../controlers/controle')
 
-router.get('/api', (listarDados) => (
-    response.send('Retorno de lista de informações do bando de dados')
-));
+router.get('/listar', listarDados);
 
-router.post('/api', (request, responde) =>(
-    responde.send('Metodo utilizado para salvar informações'),
-    console.log(request.body)
-));
+router.post('/gravar', gravarDados);
 
-router.put('/api/:id', (request, responde) =>(
-    responde.send('Metodo utilizado para editar informações'),
-    console.log ("Lol: ", request.params.id)
-));
+router.put('/atualizar/:id', atualizarDados);
 
-router.delete('/api/:id', (request, responde) =>(
-    responde.send('Metodo utilizado para deletar informações')
-));
+router.delete('/deletar/:id', deletarDados);
 
 module.exports = router;
