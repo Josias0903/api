@@ -24,9 +24,9 @@ Criar arquivo .env: armazernar as variaveis do ambiente.
 ```
 touch .env
 ```
-Intalar pacotes da API.
+# Intalar pacotes da API.
 ```
-npm i express nodemon dotenv
+npm i express nodemon dotenv mysql2
 ```
 * express: será o servidor da API.
 * nodemon: atualizar os arquivos alterados sem parar o 
@@ -70,43 +70,136 @@ npm run start
 ```
 ## Criar estrutura para o projeto
 
-criar arquivo app.js na pasta src
-````
-touch src/app
-````
+Criar arquivo app.js na pasta src
+```
+touch src/app.js
+```
 
-## Rodar o NPM install sempre que fizer um clone do github
+## Rodar o comando 'npm install' sempre que fazer um clone do gitHub
 
-## criar o arquivo .env e o .env.example
-`````
+## Criar o arquivo .env e o .env.example
+
+```
 touch .env
-`````
-
-`````
+```
+* Criar arquivo para salvar as variáveis nescessárias do aplicação sem os valores
+```
 touch .env.example
-`````
+```
 
-* Criar pas routes
-`````
+* Criar pasta routes
+```
 mkdir routes
-`````
+```
 * Criar arquivo crudRouter.js dentro da pasta routes
-`````
+```
 nano crudRouter.js
-`````
+```
+## Comando do nano
+### Ctrl + O = Salva o arquivo
+### Enter = Confirmar nome do arquivo 
+### Ctrl + X = Fechar arquivo
 
-### CTRL + O: salvar arquivo
-### Enter: confirma nome do arquivo
-### CTRL + X: sai da pagina
+* Digitar o código no arquivo criado
+```
+// Importar pacote do express
+const { Router } = require('express');
+
+// Instanciar o Router na na variavel router
+const router = Router();
+
+// Importar funções do controller para a rota acessar as funções
+const { listarDados, 
+        gravarDados,
+        atualizarDados,
+        deletarDados
+        } = require('../controllers/controller');
+
+router.get('/listar', listarDados);
+
+router.post('/gravar',gravarDados);
+
+router.put('/atualizar/:id', atualizarDados);
+
+router.delete('/deletar/:id', deletarDados);
+
+module.exports = router;
+```
+### CRIAÇÃO DE CONTROLLERS
+* Arquivos para processar as requisições das rotas 
+
+<hr> 
+
+### Criar pasta controllers
+```
+mkdir src/controller
+```
+
+### Criar aquivo controller.js
+```
+touch src/controller/countroller.js
+```
+
+### Criar funções  para processar as requisições da rotas
+```
+function listarDados(request, response) {
+        response.send('Retorno de lista de informações do bando de dados');
+        console.log('get');
+}
+
+function gravarDados(request, response){
+    response.send('Metodo utilizado para salvar informações');
+}
+
+function atualizarDados(request, response){
+    response.send('Metodo utilizado para editar informações');
+}
+
+function deletarDados(request, response){
+    response.send('Metodo utilizado para deletar informações');
+}
+module.exports = {
+    listarDados,
+    gravarDados,
+    atualizarDados,
+    deletarDados
+}
+```
 
 <hr>
 
-### Criação de controlers
+## Configurar estrutura de conecção com o banco de dados
 
-`````
-mkdir src/controlers
-`````
-### Criar arquivo controle.js
-`````
-touch src/controlers/controle.js
-`````
+### Criar pasta 'config' dentro da pasta 'src'
+```
+mkdir src/config
+```
+### Criar arquivo 'db.js' dentro da pasta 'config'
+```
+touch src/config/db.js
+```
+### Colar o codigo no arquivo 'db.js'
+```
+// Importando o pacote de conexão com banco de dados
+const mysql = require('mysql2');
+
+// Importar variaveis de conexão do banco
+require('dotenv').config();
+
+const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
+});
+
+connection.connect((err) =>{
+    if (err) {
+        console.log('Error de conexaõ: ' +err);
+    } else {
+        console.log('Mysql Connected!');
+    }
+});
+
+module.exports = connection;
+```
